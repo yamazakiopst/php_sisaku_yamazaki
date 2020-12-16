@@ -25,6 +25,13 @@ Route::group(['prefix' => 'login', 'middleware' => 'guest'], function () {
 //ログアウト
 Route::get('logout', 'LoginController@logout')->name('logout')->middleware('auth');
 
+//会員登録
+Route::group(['prefix' => 'member', 'middleware' => 'guest'], function () {
+    Route::get('index', 'MemberRegistController@index')->name('member.index');
+    Route::post('confirm', 'MemberRegistController@confirm')->name('member.confirm');
+    Route::post('regist', 'MemberRegistController@regist')->name('member.regist');
+});
+
 //どのルートにも一致しない場合
 Route::fallback(function () {
     return redirect(route('menu.user'));

@@ -5,7 +5,7 @@
     @if (!session()->has('login_user'))
     <!--未ログイン時のみ表示-->
     <tr>
-        <td><a href="">新規会員登録</a></td>
+        <td><a href="{{route("member.index")}}">新規会員登録</a></td>
         <td>会員情報の登録を行います。</td>
     </tr>
     @endif
