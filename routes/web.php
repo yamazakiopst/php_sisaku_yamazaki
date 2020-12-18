@@ -32,6 +32,11 @@ Route::group(['prefix' => 'member', 'middleware' => 'guest'], function () {
     Route::post('regist', 'MemberRegistController@regist')->name('member.regist');
 });
 
+//共通エラー
+Route::get('error', function () {
+    return view('common.error');
+})->name('error');
+
 //どのルートにも一致しない場合
 Route::fallback(function () {
     return redirect(route('menu.user'));
