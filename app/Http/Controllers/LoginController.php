@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class LoginController extends Controller
 {
     /**
-     * 初期表示
+     * ログイン画面初期表示
      */
     public function index()
     {
@@ -31,8 +31,8 @@ class LoginController extends Controller
             ['DELETE_FLG', 0],
         ])->get();
 
-        //認証失敗
-        if (count($user) !== 1) {
+        //認証失敗時
+        if ($user->count() !== 1) {
             //MSG012を出力
             $message = config('const.message.MSG012');
             return redirect()->route('login.index')->with('message', $message);

@@ -10,19 +10,19 @@ use Illuminate\Support\Facades\DB;
 class MemberRegistController extends Controller
 {
     /**
-     * 初期表示
+     * 入力画面初期表示
      */
-    public function index(Request $request)
+    public function index()
     {
         return view('member.index');
     }
 
     /**
-     * 確認ボタン押下
+     * 確認画面表示
      */
     public function confirm(MemberRegistForm $request)
     {
-        //入力値を取得する
+        //入力値取得
         $form = [
             'name' => $request->input('name'),
             'password' => $request->input('password1'),
@@ -33,16 +33,16 @@ class MemberRegistController extends Controller
             'tel' => $request->input('tel'),
         ];
 
-        //確認画面に入力値を渡す
+        //確認画面へ
         return view('member.confirm', compact('form'));
     }
 
     /**
-     * 戻る/登録ボタン押下
+     * 戻る・登録処理
      */
     public function regist(Request $request)
     {
-        /* 戻るボタン */
+        /* 戻るボタン押下時 */
         if (!is_null($request->input('back'))) {
             //入力値を保持
             $form = [
@@ -55,7 +55,7 @@ class MemberRegistController extends Controller
                 'address' => $request->input('address'),
                 'tel' => $request->input('tel'),
             ];
-            //入力画面へ遷移
+            //入力画面へ
             return redirect()->route('member.index')->withInput($form);
         }
 
@@ -88,7 +88,7 @@ class MemberRegistController extends Controller
             $ONLINE_MEMBER->save();
             DB::commit();
         } catch (\Exception $e) {
-            //エラー時 ロールバックしてエラー画面へ遷移
+            //エラー時 ロールバックして共通エラー画面へ
             DB::rollback();
             return redirect()->route('error');
         }

@@ -5,7 +5,7 @@
     @if (!session()->has('login_user'))
     <!--未ログイン時のみ表示-->
     <tr>
-        <td><a href="{{route("member.index")}}">新規会員登録</a></td>
+        <td><a href="{{route('member.index')}}">新規会員登録</a></td>
         <td>会員情報の登録を行います。</td>
     </tr>
     @endif
@@ -14,7 +14,7 @@
         <td>会員情報の変更、削除を行います。</td>
     </tr>
     <tr>
-        <td><a href="">商品検索</a></td>
+        <td><a href="{{route('product.index')}}">商品検索</a></td>
         <td> 購入する商品の検索を行います。</td>
     </tr>
     <tr>
