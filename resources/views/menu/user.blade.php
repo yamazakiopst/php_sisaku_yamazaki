@@ -18,7 +18,7 @@
         <td> 購入する商品の検索を行います。</td>
     </tr>
     <tr>
-        <td><a href="">お買い物かご</a></td>
+        <td><a href="{{route('cart.index')}}">お買い物かご</a></td>
         <td>商品の注文を行います。</td>
     </tr>
 </table>

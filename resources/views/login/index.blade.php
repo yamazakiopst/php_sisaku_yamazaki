@@ -13,7 +13,7 @@
 @if(session()->has('message'))
 <!-- 認証失敗 -->
 <label>{{session('message')}}</label></br>
-@endisset
+@endif
 
 <form method="POST" action="{{route('login.auth')}}">
     @csrf

@@ -12,6 +12,12 @@ class LoginController extends Controller
      */
     public function index()
     {
+        //前画面が注文確認orログイン画面(認証エラー)以外の場合
+        if (!(parse_url(url()->previous())['path'] === '/cart/confirm' ||
+            parse_url(url()->previous())['path'] === '/login/index')) {
+            //注文画面へ戻るフラグ削除
+            session()->forget('check_flag');
+        }
         return view('login.index');
     }
 
@@ -46,9 +52,13 @@ class LoginController extends Controller
             ];
         session()->put('login_user', $login_user);
 
-        /**
-         * TODO 遷移元から遷移先を決定する
-         */
+        //注文確認画面からの遷移の場合
+        if (session()->has('check_flag')) {
+            //フラグを削除して確認画面へ戻る
+            session()->forget('check_flag');
+            return redirect()->route('cart.confirm');
+        }
+        //上記以外の場合はメニュー画面へ
         return redirect()->route('menu.user');
     }
 

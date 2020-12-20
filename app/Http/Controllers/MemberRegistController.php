@@ -43,7 +43,7 @@ class MemberRegistController extends Controller
     public function regist(Request $request)
     {
         /* 戻るボタン押下時 */
-        if (!is_null($request->input('back'))) {
+        if ($request->input('back') !== null) {
             //入力値を保持
             $form = [
                 'name' => $request->input('name'),
@@ -60,41 +60,43 @@ class MemberRegistController extends Controller
         }
 
         /** 登録ボタン押下時 */
-        //会員番号の最大値+1として採番
-        $max = DB::table('ONLINE_MEMBER')->max('MEMBER_NO');
-        $member_no = $max + 1;
+        if ($request->input('confirm') !== null) {
+            //会員番号の最大値+1として採番
+            $max = DB::table('ONLINE_MEMBER')->max('MEMBER_NO');
+            $member_no = $max + 1;
 
-        //登録値を設定
-        $ONLINE_MEMBER = new OnlineMember;
-        $ONLINE_MEMBER->MEMBER_NO = $member_no;
-        $ONLINE_MEMBER->PASSWORD = $request->input('password');
-        $ONLINE_MEMBER->NAME = $request->input('name');
-        $ONLINE_MEMBER->AGE = $request->input('age');
-        if ($request->input('sex') === '0') {
-            $ONLINE_MEMBER->SEX = 'M';
-        } else {
-            $ONLINE_MEMBER->SEX = 'F';
+            //登録値を設定
+            $ONLINE_MEMBER = new OnlineMember;
+            $ONLINE_MEMBER->MEMBER_NO = $member_no;
+            $ONLINE_MEMBER->PASSWORD = $request->input('password');
+            $ONLINE_MEMBER->NAME = $request->input('name');
+            $ONLINE_MEMBER->AGE = $request->input('age');
+            if ($request->input('sex') === '0') {
+                $ONLINE_MEMBER->SEX = 'M';
+            } else {
+                $ONLINE_MEMBER->SEX = 'F';
+            }
+            $ONLINE_MEMBER->ZIP = $request->input('zip');
+            $ONLINE_MEMBER->ADDRESS = $request->input('address');
+            $ONLINE_MEMBER->TEL = $request->input('tel');
+            $ONLINE_MEMBER->REGISTER_DATE = now();
+            $ONLINE_MEMBER->LAST_UPD_DATE = now();
+
+            //トランザクション開始
+            DB::beginTransaction();
+            try {
+                //登録
+                $ONLINE_MEMBER->save();
+                DB::commit();
+            } catch (\Exception $e) {
+                //エラー時 ロールバックして共通エラー画面へ
+                DB::rollback();
+                return redirect()->route('error');
+            }
+
+            //完了画面でMSG001を出力する
+            $message = str_replace('${member_no}', $member_no, config('const.message.MSG001'));
+            return view('member.regist', compact('message'));
         }
-        $ONLINE_MEMBER->ZIP = $request->input('zip');
-        $ONLINE_MEMBER->ADDRESS = $request->input('address');
-        $ONLINE_MEMBER->TEL = $request->input('tel');
-        $ONLINE_MEMBER->REGISTER_DATE = now();
-        $ONLINE_MEMBER->LAST_UPD_DATE = now();
-
-        //トランザクション開始
-        DB::beginTransaction();
-        try {
-            //登録
-            $ONLINE_MEMBER->save();
-            DB::commit();
-        } catch (\Exception $e) {
-            //エラー時 ロールバックして共通エラー画面へ
-            DB::rollback();
-            return redirect()->route('error');
-        }
-
-        //完了画面でMSG001を出力する
-        $message = str_replace('${member_no}', $member_no, config('const.message.MSG001'));
-        return view('member.regist', compact('message'));
     }
 }
