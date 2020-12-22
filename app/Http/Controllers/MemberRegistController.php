@@ -32,13 +32,12 @@ class MemberRegistController extends Controller
             'address' => $request->input('address'),
             'tel' => $request->input('tel'),
         ];
-
         //確認画面へ
         return view('member.confirm', compact('form'));
     }
 
     /**
-     * 戻る・登録処理
+     * 戻る・登録処理（確認画面）
      */
     public function regist(Request $request)
     {
@@ -94,9 +93,17 @@ class MemberRegistController extends Controller
                 return redirect()->route('error');
             }
 
-            //完了画面でMSG001を出力する
+            //登録完了画面にMSG001を出力する
             $message = str_replace('${member_no}', $member_no, config('const.message.MSG001'));
-            return view('member.regist', compact('message'));
+            return redirect()->route('member.result')->with('message', $message);
         }
+    }
+
+    /**
+     * 登録完了画面
+     */
+    public function result()
+    {
+        return view('member.result');
     }
 }
