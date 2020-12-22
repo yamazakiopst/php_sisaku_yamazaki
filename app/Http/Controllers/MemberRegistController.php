@@ -61,7 +61,7 @@ class MemberRegistController extends Controller
         /** 登録ボタン押下時 */
         if ($request->input('confirm') !== null) {
             //会員番号の最大値+1として採番
-            $max = DB::table('ONLINE_MEMBER')->max('MEMBER_NO');
+            $max = OnlineMember::max('MEMBER_NO');
             $member_no = $max + 1;
 
             //登録値を設定

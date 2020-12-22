@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginForm;
-use Illuminate\Support\Facades\DB;
+use App\Models\OnlineMember;
 
 class LoginController extends Controller
 {
@@ -31,14 +31,14 @@ class LoginController extends Controller
         $password = $request->input('password');
 
         //ユーザの存在チェック
-        $user = DB::table('ONLINE_MEMBER')->select('NAME as name')->where([
+        $ONLINE_MEMBER = OnlineMember::where([
             ['MEMBER_NO', $member_no],
             ['PASSWORD', $password],
             ['DELETE_FLG', 0],
         ])->get();
 
         //ユーザーが存在しない場合
-        if ($user->count() === 0) {
+        if ($ONLINE_MEMBER->count() === 0) {
             //MSG012を出力
             $message = config('const.message.MSG012');
             return redirect()->route('login.index')->with('message', $message);
@@ -47,7 +47,7 @@ class LoginController extends Controller
         //会員番号とユーザー名をセッションに保持
         $login_user = [
             'member_no' => $member_no,
-            'user_name' => $user[0]->name
+            'user_name' => $ONLINE_MEMBER[0]->NAME
         ];
         session()->put('login_user', $login_user);
 
