@@ -16,7 +16,7 @@ class LoginController extends Controller
         if (!(parse_url(url()->previous())['path'] === '/cart/confirm' ||
             parse_url(url()->previous())['path'] === '/login/index')) {
             //注文画面へ戻るフラグ削除
-            session()->forget('check_flag');
+            session()->forget('order_return_flag');
         }
         return view('login.index');
     }
@@ -37,28 +37,27 @@ class LoginController extends Controller
             ['DELETE_FLG', 0],
         ])->get();
 
-        //認証失敗時
-        if ($user->count() !== 1) {
+        //ユーザーが存在しない場合
+        if ($user->count() === 0) {
             //MSG012を出力
             $message = config('const.message.MSG012');
             return redirect()->route('login.index')->with('message', $message);
         }
 
-        //認証成功時 会員番号とユーザー名をセッションに保持
-        $login_user =
-            [
-                'no' => $member_no,
-                'name' => $user[0]->name
-            ];
+        //会員番号とユーザー名をセッションに保持
+        $login_user = [
+            'member_no' => $member_no,
+            'user_name' => $user[0]->name
+        ];
         session()->put('login_user', $login_user);
 
-        //注文確認画面からの遷移の場合
-        if (session()->has('check_flag')) {
-            //フラグを削除して確認画面へ戻る
-            session()->forget('check_flag');
+        //注文確認画面からの遷移時
+        if (session()->has('order_return_flag')) {
+            //フラグを削除して注文確認画面へ戻る
+            session()->forget('order_return_flag');
             return redirect()->route('cart.confirm');
         }
-        //上記以外の場合はメニュー画面へ
+        //上記以外はメニュー画面へ
         return redirect()->route('menu.user');
     }
 

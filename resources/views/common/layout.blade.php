@@ -27,7 +27,7 @@
         {{\Carbon\Carbon::now()->format('Y年m月d日 H:i')}}
         @if (session()->has('login_user'))
         <!--ログイン済み -->
-        「{{session('login_user')['name']}}」
+        「{{session('login_user')['user_name']}}」
         @else
         <!-- 未ログイン -->
         「ゲストさん」
