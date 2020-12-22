@@ -93,9 +93,8 @@ class MemberRegistController extends Controller
                 return redirect()->route('error');
             }
 
-            //登録完了画面にMSG001を出力する
-            $message = str_replace('${member_no}', $member_no, config('const.message.MSG001'));
-            return redirect()->route('member.result')->with('message', $message);
+            //登録完了画面に会員番号を出力する
+            return redirect()->route('member.result')->with('member_no', $member_no);
         }
     }
 
