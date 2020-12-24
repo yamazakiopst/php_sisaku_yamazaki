@@ -34,7 +34,7 @@ class LoginController extends Controller
         $ONLINE_MEMBER = OnlineMember::where([
             ['MEMBER_NO', $member_no],
             ['PASSWORD', $password],
-            ['DELETE_FLG', 0],
+            ['DELETE_FLG', '0'],
         ])->get();
 
         //ユーザーが存在しない場合

@@ -37,7 +37,7 @@ class MemberRegistController extends Controller
     }
 
     /**
-     * 戻る・登録処理（確認画面）
+     * 戻る・登録処理
      */
     public function regist(Request $request)
     {
@@ -72,7 +72,7 @@ class MemberRegistController extends Controller
             $ONLINE_MEMBER->AGE = $request->input('age');
             if ($request->input('sex') === '0') {
                 $ONLINE_MEMBER->SEX = 'M';
-            } else {
+            } else if ($request->input('sex') === '1') {
                 $ONLINE_MEMBER->SEX = 'F';
             }
             $ONLINE_MEMBER->ZIP = $request->input('zip');
@@ -88,21 +88,13 @@ class MemberRegistController extends Controller
                 $ONLINE_MEMBER->save();
                 DB::commit();
             } catch (\Exception $e) {
-                //エラー時 ロールバックして共通エラー画面へ
+                //エラー時、ロールバックして共通エラー画面へ
                 DB::rollback();
                 return redirect()->route('error');
             }
 
-            //登録完了画面に会員番号を出力する
-            return redirect()->route('member.result')->with('member_no', $member_no);
+            //完了画面に会員番号を出力する
+            return view('member.result', compact('member_no'));
         }
-    }
-
-    /**
-     * 登録完了画面
-     */
-    public function result()
-    {
-        return view('member.result');
     }
 }
