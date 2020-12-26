@@ -34,15 +34,15 @@
 <table border="1">
     <tr>
         <td>小計</td>
-        <td align="right">&yen;{{$total}}</td>
+        <td align="right">&yen;{{number_format($total)}}</td>
     </tr>
     <tr>
         <td>消費税</td>
-        <td align="right">&yen;{{$tax}}</td>
+        <td align="right">&yen;{{number_format($tax)}}</td>
     </tr>
     <tr>
         <td>合計金額</td>
-        <td align="right">&yen;{{$total + $tax}}</td>
+        <td align="right">&yen;{{number_format($total + $tax)}}</td>
     </tr>
 </table>
 
