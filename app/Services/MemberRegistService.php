@@ -9,6 +9,7 @@ class MemberRegistService
 {
     /**
      * 会員番号を採番する
+     * return:会員番号
      */
     public static function createMemberNo()
     {
@@ -19,6 +20,7 @@ class MemberRegistService
 
     /**
      * 会員情報の登録値を設定する
+     * return:会員情報の登録値
      */
     public static function setOnlineMember($form, $member_no)
     {
@@ -43,6 +45,9 @@ class MemberRegistService
 
     /**
      * 会員情報の登録
+     * return:
+     *  true  登録成功
+     *  false 登録失敗
      */
     public static function registOnlineMember($member_info)
     {
