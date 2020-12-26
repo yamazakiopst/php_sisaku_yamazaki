@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductSearchForm;
-use App\Models\OnlineProduct;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -109,11 +108,8 @@ class ProductController extends Controller
      */
     public function detail($product_code)
     {
-        //商品コードと一致するデータを取得する
-        $ONLINE_PRODUCT = OnlineProduct::find($product_code);
-
         //表示内容の設定
-        $product = ProductService::setDetaiProduct($ONLINE_PRODUCT);
+        $product = ProductService::setDetaiProduct($product_code);
 
         //商品詳細画面へ
         return view('product.detail', compact('product'));
@@ -154,7 +150,7 @@ class ProductController extends Controller
      */
     public function back()
     {
-        //前回の検索内容/ページ数を再表示
+        //前回の検索内容、ページ数を再表示
         if (session()->has('search_form')) {
             $search_form = session('search_form');
             return redirect()->route('product.search', $search_form);

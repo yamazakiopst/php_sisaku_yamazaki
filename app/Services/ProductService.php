@@ -205,21 +205,23 @@ class ProductService
         return $products;
     }
 
-
     /**
      * 商品詳細画面に表示する商品情報の設定を行う
      * return:商品情報
      */
-    public static function setDetaiProduct($product)
+    public static function setDetaiProduct($product_code)
     {
-        $view_product = [
-            'product_name' => $product->PRODUCT_NAME,
-            'picture' => $product->PICTURE_NAME,
-            'memo' => $product->MEMO,
-            'price' => $product->UNIT_PRICE,
-            'product_code' => $product->PRODUCT_CODE
+        //商品情報取得
+        $ONLINE_PRODUCT = OnlineProduct::find($product_code);
+
+        $product = [
+            'product_name' => $ONLINE_PRODUCT->PRODUCT_NAME,
+            'picture' => $ONLINE_PRODUCT->PICTURE_NAME,
+            'memo' => $ONLINE_PRODUCT->MEMO,
+            'price' => $ONLINE_PRODUCT->UNIT_PRICE,
+            'product_code' => $ONLINE_PRODUCT->PRODUCT_CODE
         ];
-        return $view_product;
+        return $product;
     }
 
     /**
@@ -230,11 +232,11 @@ class ProductService
      */
     public static function checkCount($count)
     {
-        if (is_numeric($count) && 1 <= $count && $count <= 999) {
-            //1~999の数字
-            return false;
+        if (!(is_numeric($count) && 1 <= $count && $count <= 999)) {
+            //1~999の数字以外
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**

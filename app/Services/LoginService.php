@@ -30,7 +30,7 @@ class LoginService
      */
     public static function checkUser($user)
     {
-        if ($user->count() === 0) {
+        if ($user === null || $user->count() === 0) {
             return true;
         }
         return false;
