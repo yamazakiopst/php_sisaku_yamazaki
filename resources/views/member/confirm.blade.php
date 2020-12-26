@@ -18,7 +18,7 @@
         <tr>
             <td>性別</td>
             <td>@if ($form['sex'] === '0') 男性
-                @else 女性
+                @elseif ($form['sex'] === '1') 女性
                 @endif</td>
         </tr>
         <tr>

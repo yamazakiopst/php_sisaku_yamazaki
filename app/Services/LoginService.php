@@ -7,7 +7,7 @@ use App\Models\OnlineMember;
 class LoginService
 {
     /**
-     * 入力されたユーザーが存在するかをチェックする。
+     * 入力されたユーザーが存在するかをチェックする
      */
     public static function userCheck($member_no, $password)
     {
