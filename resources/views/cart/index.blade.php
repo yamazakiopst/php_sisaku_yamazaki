@@ -10,7 +10,7 @@
 
 <form method="POST" action="{{route('cart.operate')}}">
     @csrf
-    <table border="1">
+    <table class="mx-auto" border="1">
         <tr>
             <td>選択</td>
             <td>商品コード</td>
@@ -30,10 +30,11 @@
         </tr>
         @endforeach
     </table>
+    </br>
 
-    <input type="submit" name="delete" value="取り消し">
-    <input type="submit" name="forget" value="買い物をやめる">
-    <input type="submit" name="order" value="注文する">
-    <button type="button" onclick="location.href='{{route("menu.user")}}'">メニューへ</button>
+    <input class="btn btn-secondary" type="submit" name="delete" value="取り消し">
+    <input class="btn btn-secondary" type="submit" name="forget" value="買い物をやめる">
+    <input class="btn btn-secondary" type="submit" name="order" value="注文する">
+    <button class="btn btn-secondary" type="button" onclick="location.href='{{route("menu.user")}}'">メニューへ</button>
 </form>
 @endsection

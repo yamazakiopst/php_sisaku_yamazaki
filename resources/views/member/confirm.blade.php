@@ -6,7 +6,7 @@
 
 <form method="POST" action="{{route('member.regist')}}">
     @csrf
-    <table border="1">
+    <table class="mx-auto" border="1">
         <tr>
             <td>氏名</td>
             <td>{{$form['name']}}</td>
@@ -34,6 +34,7 @@
             <td>{{$form['tel']}}</td>
         </tr>
     </table>
+    </br>
 
     <input type="hidden" name="name" value="{{$form['name']}}">
     <input type="hidden" name="password" value="{{$form['password']}}">
@@ -43,7 +44,7 @@
     <input type="hidden" name="address" value="{{$form['address']}}">
     <input type="hidden" name="tel" value="{{$form['tel']}}">
 
-    <input type="submit" name="confirm" value="登録">
-    <input type="submit" name="back" value="戻る">
+    <input class="btn btn-secondary" type="submit" name="confirm" value="登録">
+    <input class="btn btn-secondary" type="submit" name="back" value="戻る">
 </form>
 @endsection

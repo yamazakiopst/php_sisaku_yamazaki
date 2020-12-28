@@ -4,7 +4,7 @@
 以下の商品をお買い物かごに登録しました。</br>
 ●商品一覧</br>
 
-<table border="1">
+<table class="mx-auto" border="1">
     <tr>
         <td>商品コード</td>
         <td>商品名</td>
@@ -22,7 +22,8 @@
     </tr>
     @endforeach
 </table>
+</br>
 
-<button type="button" onclick="location.href='{{route("cart.index")}}'">お買い物かご</button>
-<button type="button" onclick="location.href='{{route("product.back")}}'">戻る</button>
+<button class="btn btn-secondary" type="button" onclick="location.href='{{route("cart.index")}}'">お買い物かご</button>
+<button class="btn btn-secondary" type="button" onclick="location.href='{{route("product.back")}}'">戻る</button>
 @endsection

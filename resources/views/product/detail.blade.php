@@ -10,7 +10,7 @@
 
 <form method="POST" action="{{route('product.detail.add')}}">
     @csrf
-    <table border="1">
+    <table class="mx-auto" border="1">
         <tr>
             <td>商品名</td>
             <td>「{{$product['product_name']}}」</td>
@@ -32,10 +32,11 @@
             <td><input type="text" name="count" value="{{old('count')}}">個</td>
         </tr>
     </table>
+    </br>
 
     <input type="hidden" name="product_code" value="{{$product['product_code']}}">
 
-    <input type="submit" value="お買い物かごに入れる">
-    <button type="button" onclick="location.href='{{route("product.back")}}'">戻る</button>
+    <input class="btn btn-secondary" type="submit" value="お買い物かごに入れる">
+    <button class="btn btn-secondary" type="button" onclick="location.href='{{route("product.back")}}'">戻る</button>
 </form>
 @endsection

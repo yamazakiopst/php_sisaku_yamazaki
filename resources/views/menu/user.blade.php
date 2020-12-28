@@ -2,7 +2,7 @@
 
 @section('content')
 
-<table class="mx-auto bg-warning">
+<table class="mx-auto" border="1">
     @if (!session()->has('login_user'))
     <!--未ログイン時のみ表示-->
     <tr>
@@ -23,14 +23,13 @@
         <td>商品の注文を行います。</td>
     </tr>
 </table>
+</br>
 
-<div class="text-center">
-    @if (session()->has('login_user'))
-    <!--ログイン時のみ表示-->
-    <button type="button" onclick="location.href='{{route("logout")}}'">ログアウト</button>
-    @else
-    <!--未ログイン時のみ表示-->
-    <button class="text-center" type="button" onclick="location.href='{{route("login.index")}}'">ログイン</button>
-    @endif
-</div>
+@if (session()->has('login_user'))
+<!--ログイン時のみ表示-->
+<button class="btn btn-secondary" type="button" onclick="location.href='{{route("logout")}}'">ログアウト</button>
+@else
+<!--未ログイン時のみ表示-->
+<button class="btn btn-secondary" class="text-center" type="button" onclick="location.href='{{route("login.index")}}'">ログイン</button>
+@endif
 @endsection

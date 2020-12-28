@@ -9,7 +9,7 @@
 @endif
 
 <?php $total = 0; ?>
-<table border="1">
+<table class="mx-auto" border="1">
     <tr>
         <td>商品コード</td>
         <td>商品名</td>
@@ -28,10 +28,11 @@
     <?php $total += $product['price'] * $product['count'] ?>
     @endforeach
 </table>
+</br>
 
 ●料金</br>
 <?php $tax = floor($total / 10); ?>
-<table border="1">
+<table class="mx-auto" border="1">
     <tr>
         <td>小計</td>
         <td align="right">&yen;{{number_format($total)}}</td>
@@ -45,14 +46,15 @@
         <td align="right">&yen;{{number_format($total + $tax)}}</td>
     </tr>
 </table>
+</br>
 
 <form method="POST" action="{{route('cart.order')}}">
     @csrf
     <input type="hidden" name="total_money" value="{{$total}}">
     <input type="hidden" name="total_tax" value="{{$tax}}">
 
-    <input type="submit" name="forget" value="買い物をやめる">
-    <input type="submit" name="order" value="注文する">
-    <button type="button" onclick="location.href='{{route("cart.index")}}'">戻る</button>
+    <input class="btn btn-secondary" type="submit" name="forget" value="買い物をやめる">
+    <input class="btn btn-secondary" type="submit" name="order" value="注文する">
+    <button class="btn btn-secondary" type="button" onclick="location.href='{{route("cart.index")}}'">戻る</button>
 </form>
 @endsection

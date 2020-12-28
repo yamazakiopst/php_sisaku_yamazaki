@@ -13,7 +13,7 @@
 
 <form method="POST" action="{{route('member.confirm')}}">
     @csrf
-    <table border="1">
+    <table class="mx-auto" border="1">
         <tr>
             <td>氏名</td>
             <td><input type="text" name="name" value="{{old('name')}}"></td>
@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <td>性別</td>
-            <td>
+            <td class="text-left">
                 <select name="sex">
                     <option value="0" @if (old('sex')==='0' ) selected @endif>男性</option>
                     <option value="1" @if (old('sex')==='1' ) selected @endif>女性</option>
@@ -52,9 +52,10 @@
             <td><input type="text" name="tel" value="{{old('tel')}}"></td>
         </tr>
     </table>
+    </br>
 
-    <input type="submit" value="確認">
-    <button type="button" onclick="location.href='{{route("menu.user")}}'">戻る</button>
-    <button type="button" onclick="location.href='{{route("member.index")}}'">クリア</button>
+    <input class="btn btn-secondary" type="submit" value="確認">
+    <button class="btn btn-secondary" type="button" onclick="location.href='{{route("menu.user")}}'">戻る</button>
+    <button class="btn btn-secondary" type="button" onclick="location.href='{{route("member.index")}}'">クリア</button>
 </form>
 @endsection

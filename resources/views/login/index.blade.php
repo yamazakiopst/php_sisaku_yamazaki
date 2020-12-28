@@ -17,7 +17,7 @@
 
 <form method="POST" action="{{route('login.auth')}}">
     @csrf
-    <table>
+    <table class="mx-auto" border="1">
         <tr>
             <td>会員NO</td>
             <td><input type="text" name="member_no"></td>
@@ -27,7 +27,9 @@
             <td><input type="password" name="password"></td>
         </tr>
     </table>
-    <input type="submit" value="ログイン">
-    <input type="reset" value="クリア">
+    </br>
+
+    <input class="btn btn-secondary" type="submit" value="ログイン">
+    <input class="btn btn-secondary" type="reset" value="クリア">
 </form>
 @endsection

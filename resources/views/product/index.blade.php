@@ -21,10 +21,11 @@
 @endif
 
 <form method="GET" action="{{route('product.search')}}">
-    <table border="1">
+    <table class="mx-auto" border="1">
         <tr>
             <td>カテゴリ</td>
-            <td><select name="category">
+            <td class="text-left">
+                <select name="category">
                     <option value="">全て</option>
                     @foreach($categories as $category)
                     <option value="{{$category->ctgr_id}}" @if (intval(old('category',isset($search_form)?$search_form['category']:''))===$category->ctgr_id) selected @endif>{{$category->name}}</option>
@@ -49,11 +50,13 @@
             <td><input type="text" name="min_price" value="{{old('min_price',isset($search_form)?$search_form['min_price']:'')}}"></td>
         </tr>
     </table>
+    </br>
 
-    <input type="submit" value="検索">
-    <button type="button" onclick="location.href='{{route("menu.user")}}'">戻る</button>
-    <button type="button" onclick="location.href='{{route("product.index")}}'">クリア</button>
+    <input class="btn btn-secondary" type="submit" value="検索">
+    <button class="btn btn-secondary" type="button" onclick="location.href='{{route("menu.user")}}'">戻る</button>
+    <button class="btn btn-secondary" type="button" onclick="location.href='{{route("product.index")}}'">クリア</button>
 </form>
+</br>
 
 @if(isset($products))
 <!-- 検索結果 -->
@@ -62,7 +65,7 @@
 
 <form method="POST" action="{{route('product.add')}}">
     @csrf
-    <table border="1">
+    <table class="mx-auto" border="1">
         <tr>
             <td>選択</td>
             <td>商品コード</td>
@@ -92,7 +95,9 @@
         </tr>
         @endforeach
     </table>
-    <input type="submit" value="お買い物かごに入れる">
+    </br>
+
+    <input class="btn btn-secondary" type="submit" value="お買い物かごに入れる">
 </form>
 @endif
 @endsection
