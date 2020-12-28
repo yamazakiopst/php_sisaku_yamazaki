@@ -23,8 +23,10 @@
 
 <body>
     <!-- 共通ヘッダー -->
-    <label>オンラインショッピングサイト
+    <label class="left">オンラインショッピングサイト
         {{\Carbon\Carbon::now()->format('Y年m月d日 H:i')}}
+    </label>
+    <label class="right">
         @if(session()->has('login_user'))
         <!--ログイン済み -->
         「{{session('login_user')['user_name']}}」
