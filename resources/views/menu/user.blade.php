@@ -1,7 +1,8 @@
 @extends('common.layout')
 
 @section('content')
-<table>
+
+<table class="mx-auto bg-warning">
     @if (!session()->has('login_user'))
     <!--未ログイン時のみ表示-->
     <tr>
@@ -23,11 +24,13 @@
     </tr>
 </table>
 
-@if (session()->has('login_user'))
-<!--ログイン時のみ表示-->
-<button type="button" onclick="location.href='{{route("logout")}}'">ログアウト</button>
-@else
-<!--未ログイン時のみ表示-->
-<button type="button" onclick="location.href='{{route("login.index")}}'">ログイン</button>
-@endif
+<div class="text-center">
+    @if (session()->has('login_user'))
+    <!--ログイン時のみ表示-->
+    <button type="button" onclick="location.href='{{route("logout")}}'">ログアウト</button>
+    @else
+    <!--未ログイン時のみ表示-->
+    <button class="text-center" type="button" onclick="location.href='{{route("login.index")}}'">ログイン</button>
+    @endif
+</div>
 @endsection

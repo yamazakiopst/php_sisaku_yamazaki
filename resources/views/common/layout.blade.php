@@ -23,19 +23,19 @@
 
 <body>
     <!-- 共通ヘッダー -->
-    <label class="left">オンラインショッピングサイト
-        {{\Carbon\Carbon::now()->format('Y年m月d日 H:i')}}
-    </label>
-    <label class="right">
-        @if(session()->has('login_user'))
-        <!--ログイン済み -->
-        「{{session('login_user')['user_name']}}」
-        @else
-        <!-- 未ログイン -->
-        「ゲストさん」
-        @endif
-    </label>
-    </br>
+    <div class="border-bottom border-dark">
+        オンラインショッピングサイト
+        <div class="float-right">
+            {{\Carbon\Carbon::now()->format('Y年m月d日 H:i')}}
+            @if(session()->has('login_user'))
+            <!--ログイン済み -->
+            「{{session('login_user')['user_name']}}」
+            @else
+            <!-- 未ログイン -->
+            「ゲストさん」
+            @endif
+        </div>
+    </div>
 
     @yield('content')
 </body>
